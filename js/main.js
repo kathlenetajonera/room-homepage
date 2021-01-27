@@ -18,7 +18,20 @@ updateContentBg(counter);
 
 navicon.addEventListener("click", toggleMobileNav);
 
-nextBtn.addEventListener("click", () => {
+nextBtn.addEventListener("click", nextContent);
+prevBtn.addEventListener("click", prevContent);
+
+document.addEventListener("keydown", e => {
+    const selectedKey = e.keyCode;
+
+    if (selectedKey === 39) {
+        nextContent();
+    } else if (selectedKey === 37) {
+        prevContent();
+    }
+})
+
+function nextContent() {
     counter < 2 ? counter++ : counter = 0;
 
     content.forEach(con => con.classList.remove("active", "fade-In", "fade-Out"));
@@ -26,9 +39,9 @@ nextBtn.addEventListener("click", () => {
     content[counter].classList.add("active", "fade-In");
 
     updateContentBg(counter);
-})
+}
 
-prevBtn.addEventListener("click", () => {
+function prevContent() {
     counter > 0 ? counter-- : counter = 2;
 
     content.forEach(con => con.classList.remove("active", "fade-Out", "fade-In"));
@@ -36,7 +49,7 @@ prevBtn.addEventListener("click", () => {
     content[counter].classList.add("active", "fade-Out");
 
     updateContentBg(counter);
-})
+}
 
 function updateContentBg(contentIndex) {
     let isTablet = lgMobileSize();
