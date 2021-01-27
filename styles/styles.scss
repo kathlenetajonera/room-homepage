@@ -1,0 +1,356 @@
+@import "./variables";
+@import "./reset";
+@import "./mixins&anim";
+
+.landing {
+    position: relative;
+
+    .body-text {
+        color: $darkGray; 
+        font-size: .8rem;
+        line-height: 1.3rem;
+        margin: 1rem 0 2rem;
+
+        @include mediaQuery(tablet) {
+            font-size: .7rem;
+        }
+    }
+
+    .navbar {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 3rem 1.5rem;
+        width: 50%;
+        z-index: 999;
+
+        @include mediaQuery(tablet) {
+            width: initial;
+        }
+
+        @include mediaQuery(desktop) {
+            padding: 3rem;
+        }
+
+        &.active {
+            background: $white;
+            width: 100%;
+
+            .logo {
+                transform: none;
+            }
+        }
+
+        .navicon {
+            cursor: pointer;
+
+            span {
+                display: block;
+                width: 18px;
+                height: 2px;
+                background-color: $white;
+                margin-bottom: 3px;  
+                transform-origin: 2px;
+                transition: .2s ease;
+                
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            &[aria-expanded=true] {
+                span {
+                    background-color: $darkGray;
+
+                    &:first-child {
+                        transform: rotate(45deg);
+                    }
+
+                    &:nth-child(2) {
+                        opacity: 0;
+                    }
+
+                    &:last-child {
+                        transform: rotate(-45deg);
+                    }
+                }
+            }
+
+            @include mediaQuery(tablet) {
+                display: none;
+            }
+        }
+
+        .menu {
+            display: none;
+
+            &.active {
+                display: block;
+                position: absolute;
+                right: 5%;
+            }
+
+            .nav-links {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+    
+                li {
+                    padding: 0 .7rem;
+    
+                    a {
+                        color: $black;
+                        text-transform: lowercase;
+                        font-size: .8rem;
+                        position: relative;
+
+                        &::after {
+                            content: "";
+                            display: block;
+                            width: 20px;
+                            height: 2px;
+                            background-color: transparent;
+                            position: absolute;
+                            bottom: -80%;
+                            left: 50%;
+                            transform: translateX(-50%);
+                        }
+
+                        &:hover {
+                            &::after {
+                                background-color: $black;
+                            }
+                        }
+                    }
+                }
+            }
+
+            @include mediaQuery(tablet) {
+                display: block;
+                margin-left: 4rem;
+
+                .nav-links {
+                    li {
+                        a {
+                            color: $white;
+
+                            &:hover {
+                                &::after {
+                                    background-color: $white;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+        .logo {
+            transform: translateX(100%);
+
+            @include mediaQuery(tablet) {
+                transform: none;
+            }
+
+            img {
+                display: block;
+            }
+        }
+    }
+
+    .mobile-overlay {
+        opacity: 0;
+        transition: .2s ease;
+        
+        &.active {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: $black;
+            opacity: .5;
+            z-index: 2;
+        }
+    }
+
+    .grid-two-col {
+        display: grid;
+        grid-template-rows: 400px;
+
+        @include mediaQuery(tablet) {
+            grid-template-columns: 1.5fr 1fr;
+        }
+
+        @include mediaQuery(desktop) {
+            grid-template-rows: 450px;
+        }
+
+        .image {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            transition: .2s ease;
+            z-index: 1;
+
+            .buttons {
+                background: black;
+                display: flex;
+                align-items: center;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+
+                @include mediaQuery(desktop) {
+                    transform: translateX(100%);
+                }
+
+                span {
+                    padding: 1rem 1.5rem;
+                    cursor: pointer;
+
+                    @include mediaQuery(desktop-lg) {
+                        padding: 1rem 2rem;
+                    }
+
+                    &:hover {
+                        background-color: $veryDarkGray;
+                    }
+
+                    img {
+                        width: auto;
+                    }
+                }
+            }
+        }
+
+        .text {
+            align-self: center;
+            z-index: 0;
+
+            .content {
+                display: none;
+                padding: 4rem 2rem;
+
+                @include mediaQuery(tablet) {
+                    padding: 3rem 1.5rem;
+                }
+
+                @include mediaQuery(desktop-lg) {
+                    padding: 3rem 5rem;
+                }
+    
+                h1 {
+                    font-size: 1.8rem;
+                    font-weight: 600;
+
+                    @include mediaQuery(tablet) {
+                        font-size: 1.6rem;
+                    }
+
+                    @include mediaQuery(desktop) {
+                        font-size: 2rem;
+                    }
+                }
+    
+                .cta-btn {
+                    display: inline-block;
+                    color: $black;
+                    text-transform: uppercase;
+                    letter-spacing: 3px;
+                    font-size: .8rem;
+    
+                    &::after {
+                        content: url("/images/icon-arrow.svg");
+                        margin-left: 2rem;
+                    }
+
+                    &:hover {
+                        color: $darkGray;
+
+                        &::after {
+                            content: url("/images/icon-arrow-hover.svg");
+                        }
+                    }
+                }
+
+                &.active {
+                    display: block;
+
+                    &.fade-In {
+                        animation: fade-In .3s;
+                    }
+
+                    &.fade-Out {
+                        animation: fade-Out .3s;
+                    }
+                }
+            }
+        }
+    }
+
+    .grid-three-col {
+        display: grid;
+        align-items: center;
+
+        @include mediaQuery(tablet) {
+            grid-template-columns: 1fr 1.5fr 1fr;
+        }
+
+        .dark-image {
+            background-image: url("/images/image-about-dark.jpg");
+            background-size: cover;
+            background-position: center;
+            height: 266px;
+
+            @include mediaQuery(tablet) {
+                height: 100%;
+            }
+        }
+
+        .light-image {
+            background-image: url("/images/image-about-light.jpg");
+            background-size: cover;
+            background-position: center;
+            height: 266px;
+
+            @include mediaQuery(tablet) {
+                height: 100%;
+            }
+        }
+
+        .text {
+            padding: 4rem 2rem;
+
+            @include mediaQuery(tablet) {
+                padding: 3rem 1.5rem;
+            }
+
+            @include mediaQuery(desktop-lg) {
+                padding: 3rem;
+            }
+
+            h5 {
+                text-transform: uppercase;
+                font-size: .8rem;
+                letter-spacing: 4px;
+                font-weight: 600;
+            }
+
+            p {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+.attribution {
+    font-family: $font-family;
+    font-size: 10px;
+    text-align: center;
+    padding: 1rem;
+
+    a { color: hsl(228, 45%, 44%); }
+}
