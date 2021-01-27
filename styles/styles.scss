@@ -52,7 +52,7 @@
                 background-color: $white;
                 margin-bottom: 3px;  
                 transform-origin: 2px;
-                transition: .2s ease;
+                transition: .2s ease-in-out;
                 
                 &:last-child {
                     margin-bottom: 0;
@@ -192,7 +192,7 @@
             position: relative;
             background-size: cover;
             background-position: center;
-            transition: .2s ease;
+            transition: .2s ease-in-out;
             z-index: 1;
 
             .buttons {

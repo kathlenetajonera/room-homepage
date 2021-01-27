@@ -144,8 +144,8 @@ ul {
   margin-bottom: 3px;
   -webkit-transform-origin: 2px;
           transform-origin: 2px;
-  -webkit-transition: .2s ease;
-  transition: .2s ease;
+  -webkit-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
 }
 
 .landing .navbar .navicon span:last-child {
@@ -297,8 +297,8 @@ ul {
   position: relative;
   background-size: cover;
   background-position: center;
-  -webkit-transition: .2s ease;
-  transition: .2s ease;
+  -webkit-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
   z-index: 1;
 }
 
